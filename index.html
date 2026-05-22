@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EGC Ekora Global Consulting | Premium R&D, Manufacturing & Turnkey Plant Solutions</title>
+    <meta name="description" content="EGC Ekora Global Consulting is a world-class premium cosmetic engineering, product development, turnkey plant planning, and regulatory compliance consulting agency. Redefining modern skincare technology.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="index.css">
+    <!-- Three.js for 3D Cosmetic Bottle Rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <!-- Custom Luxury Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-follower"></div>
+
+    <!-- Screen Transition Overlay -->
+    <div class="page-transition-overlay">
+        <div class="transition-bar"></div>
+        <div class="transition-bar"></div>
+        <div class="transition-bar"></div>
+    </div>
+
+    <!-- Premium Header -->
+    <header class="luxury-header">
+        <div class="header-container">
+            <a href="#home" class="brand-logo" id="logo-trigger">
+                <img src="assets/logo_black.png" alt="EGC Ekora Global Consulting Logo" class="header-logo-img">
+            </a>
+            
+            <nav class="desktop-nav">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#products" class="nav-link">Product Expertise</a>
+                <a href="#innovation" class="nav-link">R&D Lab</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#contact" class="nav-link btn-luxury-header">Get Consultation</a>
+            </nav>
+
+            <button class="menu-toggle-btn" aria-label="Open Navigation Directory">
+                <span class="menu-text">INDEX</span>
+                <div class="menu-hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </button>
+        </div>
+    </header>
+
+    <!-- Fullscreen Directory Drawer Menu -->
+    <div class="navigation-drawer">
+        <div class="drawer-bg-glow"></div>
+        <div class="drawer-container">
+            <div class="drawer-left">
+                <div class="drawer-brand-snapshot">
+                    <img src="assets/logo_white.png" alt="EGC Ekora Global Consulting Logo" class="drawer-logo-img">
+                    <h4 style="color: var(--color-gold); font-size: 20px; letter-spacing: 0.15em; font-family: var(--font-serif); margin-bottom: 10px;">EGC EKORA GLOBAL CONSULTING</h4>
+                    <p>Pioneering scientific excellence and haute-couture formulation design for global cosmetics.</p>
+                </div>
+                <div class="drawer-quick-stats">
+                    <div class="stat-item">
+                        <span class="stat-num">350+</span>
+                        <span class="stat-lbl">Formulations Launched</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">40+</span>
+                        <span class="stat-lbl">Turnkey Plants Built</span>
+                    </div>
+                </div>
+            </div>
+            <div class="drawer-right">
+                <span class="drawer-section-label">DIRECTORY</span>
+                <nav class="drawer-nav">
+                    <ul>
+                        <li><a href="#home" data-page="home" class="drawer-link"><span class="num">01</span> Home</a></li>
+                        <li><a href="#about" data-page="about" class="drawer-link"><span class="num">02</span> About Us</a></li>
+                        <li><a href="#services" data-page="services" class="drawer-link"><span class="num">03</span> Services</a></li>
+                        <li><a href="#products" data-page="products" class="drawer-link"><span class="num">04</span> Product Expertise</a></li>
+                        <li><a href="#industries" data-page="industries" class="drawer-link"><span class="num">05</span> Industries We Serve</a></li>
+                        <li><a href="#global" data-page="global" class="drawer-link"><span class="num">06</span> Global Markets</a></li>
+                        <li><a href="#portfolio" data-page="portfolio" class="drawer-link"><span class="num">07</span> Projects & Portfolio</a></li>
+                        <li><a href="#innovation" data-page="innovation" class="drawer-link"><span class="num">08</span> R&D Innovation</a></li>
+                        <li><a href="#certifications" data-page="certifications" class="drawer-link"><span class="num">09</span> Compliance & Certs</a></li>
+                        <li><a href="#blog" data-page="blog" class="drawer-link"><span class="num">10</span> Insights / Blog</a></li>
+                        <li><a href="#careers" data-page="careers" class="drawer-link"><span class="num">11</span> Careers</a></li>
+                        <li><a href="#faq" data-page="faq" class="drawer-link"><span class="num">12</span> FAQ</a></li>
+                        <li><a href="#contact" data-page="contact" class="drawer-link"><span class="num">13</span> Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed 3D Bottle Visualizer Scene (Floating container behind content, or split screen) -->
+    <div id="bottle-3d-viewport">
+        <canvas id="bottle-canvas"></canvas>
+        <div class="viewport-overlay-ui">
+            <div class="bottle-label-indicator">
+                <span class="label-heading">EGC ENGINEERING</span>
+                <span class="label-sub" id="current-bottle-active">Niacinamide Skincare Serum</span>
+                <span class="label-vol">30mL 1.01 fl. oz.</span>
+            </div>
+            <div class="interactive-rotation-hint">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 12a9 9 0 11-9-9c2.5 0 4.83 1.04 6.55 2.73M21 3v5h-5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Interactive 3D View (Drag to rotate)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Single-Page Container -->
+    <div id="content-container">
+
+        <!-- ========================================== -->
+        <!-- VIEW: HOME                                 -->
+        <!-- ========================================== -->
+        <section id="view-home" class="page-view active">
+            
+            <!-- SECTION 1: Hero Banner -->
+            <div class="hero-banner section-reveal">
+                <div class="hero-bg-accent"></div>
+                <div class="hero-text-lock">
+                    <span class="hero-eyebrow">THE SCIENCE OF LUXURY BEAUTY</span>
+                    <h1 class="hero-title font-playfair">
+                        Engineering<br>
+                        <span class="title-italic italic">Excellence</span><br>
+                        In Every Drop
+                    </h1>
+                    <p class="hero-lead font-poppins">
+                        We design award-winning cosmetic formulations, plan state-of-the-art automated production factories, and guide high-growth D2C brands from concept to global distribution.
+                    </p>
+                    <div class="hero-cta-group">
+                        <a href="#services" class="btn-primary">Explore Services</a>
+                        <a href="#innovation" class="btn-secondary">Enter R&D Lab</a>
+                    </div>
+                </div>
+                
+                <!-- Quick Carousel slider for hero visual reference layout -->
+                <div class="hero-mini-gallery">
+                    <div class="gallery-card">
+                        <span class="gallery-num">01 / R&D</span>
+                        <div class="gallery-img-mock design-rd"></div>
+                        <h4>Compounding Innovation</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: About Company Snapshot -->
+            <div class="company-snapshot section-reveal section-padding">
+                <div class="grid-2col">
+                    <div class="snapshot-left">
+                        <span class="section-label">EGC AT A GLANCE</span>
+                        <h2 class="section-title font-playfair">Pioneering cosmetic technology & factory architecture.</h2>
+                        <p class="snapshot-story">Founded by cosmetic scientists and cleanroom engineering pioneers, EGC bridges the gap between boutique chemical breakthroughs and high-volume, GMP-compliant robotic manufacturing. We don't just formulate cosmetics; we engineer the futures of beauty empires.</p>
+                    </div>
+                    <div class="snapshot-right">
+                        <div class="luxury-quote">
+                            <span class="quote-mark">“</span>
+                            <p class="quote-text font-playfair italic">"A cosmetic product is the perfect harmony of biochemical precision, aesthetic luxury, and logistical scalability."</p>
+                            <span class="quote-author">— Dr. Elizabeth Vance, Founder & Chief Chemist</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: Our Services Overview -->
+            <div class="services-overview section-reveal section-padding theme-dark">
+                <div class="section-header-centered">
+                    <span class="section-label text-gold">OUR CAPABILITIES</span>
+                    <h2 class="section-title font-playfair text-white">Full-Scale Cosmetic Advisory</h2>
+                    <p class="section-subtitle">We manage your product lifecycle from laboratory test tubes to fully optimized high-output packaging lines.</p>
+                </div>
+
+                <div class="services-grid-main">
+                    <div class="service-teaser-card">
+                        <div class="card-num">01</div>
+                        <h3>Cosmetic R&D & Formulation</h3>
+                        <p>Bespoke formulation development with complete compatibility, stability, and accelerated shelf-life studies.</p>
+                        <a href="#services" class="card-link" data-service="rd">Read Scope &rarr;</a>
+                    </div>
+                    <div class="service-teaser-card">
+                        <div class="card-num">02</div>
+                        <h3>Plant Setup & Factory Planning</h3>
+                        <p>Cleanroom planning, ISO/GMP floor-plan zoning, robotic machinery selection, and HVAC utility calculations.</p>
+                        <a href="#services" class="card-link" data-service="plant">Read Scope &rarr;</a>
+                    </div>
+                    <div class="service-teaser-card">
+                        <div class="card-num">03</div>
+                        <h3>Turnkey Project Solutions</h3>
+                        <p>Complete project oversight from greenfield factory construction to standard operating procedure (SOP) validations.</p>
+                        <a href="#services" class="card-link" data-service="turnkey">Read Scope &rarr;</a>
+                    </div>
+                    <div class="service-teaser-card">
+                        <div class="card-num">04</div>
+                        <h3>Regulatory, BIS & FDA Compliance</h3>
+                        <p>Comprehensive regulatory strategy, dossier filings, safety assessments, and product licensing clearances.</p>
+                        <a href="#services" class="card-link" data-service="regulatory">Read Scope &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 4: Product Categories Showcase -->
+            <div class="product-showcase section-reveal section-padding">
+                <div class="grid-2col align-center">
+                    <div class="showcase-content">
+                        <span class="section-label">PRODUCT EXPERTISE</span>
+                        <h2 class="section-title font-playfair">Formulation Mastery Across Categories</h2>
+                        <p>Our formulation laboratory has engineered thousands of proprietary formulations. Click on a category to interactively load the product profile in our 3D Visualizer.</p>
+                        
+                        <div class="product-interactive-selector">
+                            <button class="prod-selector-btn active" data-category="skin" data-color="#fdfdfa" data-glass="frosted" data-label="Skincare: Hyaluronic Serum">Skincare</button>
+                            <button class="prod-selector-btn" data-category="hair" data-color="#e9a868" data-glass="glossy-amber" data-label="Haircare: Organic Rosemary Oil">Haircare</button>
+                            <button class="prod-selector-btn" data-category="body" data-color="#d6ebd0" data-glass="glossy-green" data-label="Bodycare: Seaweed Serum">Bodycare</button>
+                            <button class="prod-selector-btn" data-category="luxury" data-color="#d4af37" data-glass="gold-infused" data-label="Luxury: 24k Gold Serum">Luxury & Premium</button>
+                            <button class="prod-selector-btn" data-category="makeup" data-color="#d95d5d" data-glass="glossy-red" data-label="Makeup: Liquid Blush">Color Cosmetics</button>
+                        </div>
+                        <a href="#products" class="btn-text-arrow">View Complete Product Catalog &rarr;</a>
+                    </div>
+                    <div class="showcase-visual-reference">
+                        <!-- Placed dynamically via CSS / Canvas. Users will see 3D bottle react immediately -->
+                        <div class="interactive-instruction-card">
+                            <span class="card-title">Formulation Breakdown</span>
+                            <div class="metric-row">
+                                <span>Active Ingredient Purity:</span>
+                                <strong id="active-purity-val">99.8%</strong>
+                            </div>
+                            <div class="metric-row">
+                                <span>Natural Origin Index:</span>
+                                <strong id="natural-origin-val">96.5%</strong>
+                            </div>
+                            <p id="category-description-mock">Our clinical-grade skincare formulas utilize bio-fermented active compounds and multi-weight acids for deep epidermal cell rejuvenation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 5: Industries We Serve -->
+            <div class="industries-serve section-reveal section-padding theme-dark-cool">
+                <div class="section-header-centered">
+                    <span class="section-label text-gold">INDUSTRIES WE SERVE</span>
+                    <h2 class="section-title font-playfair text-white">Empowering Global Beauty Operators</h2>
+                </div>
+                <div class="industries-marquee-container">
+                    <div class="marquee-track">
+                        <div class="marquee-item"><span>D2C Beauty Brands</span></div>
+                        <div class="marquee-item"><span>Dermatology Groups</span></div>
+                        <div class="marquee-item"><span>Wellness & Ayurveda Brands</span></div>
+                        <div class="marquee-item"><span>Spa & Salon Chains</span></div>
+                        <div class="marquee-item"><span>Ecommerce Brands</span></div>
+                        <div class="marquee-item"><span>Pharmaceutical Conglomerates</span></div>
+                        <div class="marquee-item"><span>Luxury Retail Chains</span></div>
+                        <div class="marquee-item"><span>Hotel Amenities Brands</span></div>
+                    </div>
+                </div>
+                <div class="read-more-center">
+                    <a href="#industries" class="btn-secondary">Explore Industry Solutions</a>
+                </div>
+            </div>
+
+            <!-- SECTION 6: Global Presence & Markets -->
+            <div class="global-presence section-reveal section-padding">
+                <div class="grid-2col align-center">
+                    <div class="map-illustration">
+                        <!-- High end interactive SVG map showing points of compliance and manufacturing clients -->
+                        <svg class="map-vector" viewBox="0 0 1000 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Continents -->
+                            <g fill="#E5E3DF" opacity="0.6">
+                                <!-- North America -->
+                                <path d="M 80,100 C 90,80 120,60 160,60 C 180,60 210,50 250,55 C 270,58 310,65 330,85 C 340,95 320,130 300,155 C 290,170 280,180 270,210 C 265,225 255,250 245,260 C 235,270 220,240 225,220 C 228,210 235,190 220,180 C 200,165 180,165 150,175 C 130,180 120,170 110,150 C 100,135 75,120 80,100 Z" />
+                                <!-- Greenland -->
+                                <path d="M 310,35 C 330,30 365,30 375,40 C 385,50 380,70 360,75 C 345,78 320,70 310,55 C 305,48 305,38 310,35 Z" />
+                                <!-- South America -->
+                                <path d="M 245,260 C 255,265 270,270 280,290 C 295,320 315,350 320,380 C 322,410 300,450 290,480 C 285,490 278,490 275,480 C 265,430 245,370 235,340 C 225,310 215,290 225,275 C 230,265 240,258 245,260 Z" />
+                                <!-- Africa -->
+                                <path d="M 450,210 C 470,200 500,195 530,200 C 560,205 580,225 595,250 C 605,270 600,300 585,330 C 570,360 550,390 535,420 C 525,435 515,435 510,420 C 500,390 475,340 460,310 C 450,290 440,270 440,250 C 440,230 440,215 450,210 Z" />
+                                <!-- Europe & Asia -->
+                                <path d="M 410,160 C 410,140 420,120 435,115 C 450,110 465,115 480,110 C 495,105 510,120 520,135 C 540,115 570,100 620,95 C 670,90 730,95 780,95 C 830,95 870,105 890,125 C 910,145 915,175 895,205 C 875,235 850,260 835,280 C 820,300 805,310 790,295 C 780,285 785,270 770,260 C 755,250 740,255 725,255 C 710,255 695,245 680,255 C 665,265 650,275 635,260 C 620,245 600,250 585,240 C 570,230 550,235 535,225 C 520,215 515,200 520,135 Z" />
+                                <!-- India -->
+                                <path d="M 635,260 C 640,275 645,290 655,305 C 665,320 670,320 675,305 C 680,290 682,275 680,255 Z" />
+                                <!-- Australia -->
+                                <path d="M 780,340 C 800,335 830,340 850,355 C 865,370 870,390 855,415 C 840,435 810,440 790,430 C 770,420 765,395 765,370 C 765,355 770,345 780,340 Z" />
+                                <!-- Great Britain -->
+                                <path d="M 405,100 C 410,95 418,100 415,110 C 412,120 405,115 405,100 Z" />
+                                <!-- Japan -->
+                                <path d="M 905,150 C 910,145 915,160 912,175 C 908,190 900,185 905,150 Z" />
+                            </g>
+
+                            <!-- Connecting lines from laboratory (centered at hub) to different regions -->
+                            <g stroke="#C5A880" stroke-width="1.5" stroke-dasharray="4 4" fill="none" opacity="0.8">
+                                <path d="M 500 200 C 400 150, 300 120, 200 140" />
+                                <path d="M 500 200 C 420 250, 340 300, 280 340" />
+                                <path d="M 500 200 C 560 240, 620 280, 660 300" />
+                                <path d="M 500 200 C 620 180, 720 180, 820 200" />
+                                <path d="M 500 200 C 640 280, 740 340, 810 400" />
+                            </g>
+
+                            <!-- Hub locator points with pulsing effect -->
+                            <circle cx="500" cy="200" r="8" fill="#111" />
+                            <circle cx="500" cy="200" r="14" fill="none" stroke="#C5A880" stroke-width="1" class="pulse-circle" />
+
+                            <!-- Client distribution pins -->
+                            <circle cx="200" cy="140" r="5" fill="#C5A880" />
+                            <circle cx="280" cy="340" r="5" fill="#C5A880" />
+                            <circle cx="660" cy="300" r="5" fill="#C5A880" />
+                            <circle cx="820" cy="200" r="5" fill="#C5A880" />
+                            <circle cx="810" cy="400" r="5" fill="#C5A880" />
+
+                            <!-- Regional Labels -->
+                            <g font-size="10" font-family="Inter, sans-serif" fill="#1A1A1A" font-weight="500" letter-spacing="0.05em">
+                                <text x="200" y="125" text-anchor="middle">FDA (North America)</text>
+                                <text x="500" y="175" text-anchor="middle" font-weight="bold">CPNP (Europe Hub)</text>
+                                <text x="660" y="322" text-anchor="middle">CDSCO &amp; BIS (India)</text>
+                                <text x="820" y="220" text-anchor="middle">APAC Markets</text>
+                                <text x="280" y="362" text-anchor="middle">LATAM Registration</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="presence-content">
+                        <span class="section-label">GLOBAL DISTRIBUTION</span>
+                        <h2 class="section-title font-playfair">Global Regulatory Compliance</h2>
+                        <p>Expanding your brand internationally requires navigating dense regulatory environments. EGC provides comprehensive product registration dossiers for seamless entry into major global markets.</p>
+                        <ul class="luxury-list">
+                            <li><strong>North America:</strong> FDA Modernization Act (MoCRA) compliance.</li>
+                            <li><strong>Europe:</strong> Cosmetic Product Notification Portal (CPNP) documentation.</li>
+                            <li><strong>India:</strong> Central Drugs Standard Control Organisation (CDSCO) & BIS registrations.</li>
+                            <li><strong>Middle East:</strong> ESMA & SFDA registration support.</li>
+                        </ul>
+                        <a href="#global" class="btn-text-arrow">Explore Global Markets &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 7: R&D & Innovation Laboratory Sandbox -->
+            <div class="innovation-sandbox-teaser section-reveal section-padding theme-dark">
+                <div class="grid-2col align-center">
+                    <div class="sandbox-teaser-left">
+                        <span class="section-label text-gold">R&D INNOVATION</span>
+                        <h2 class="section-title font-playfair text-white">Interactive Formulation Lab</h2>
+                        <p>Welcome to our scientific playground. Customize active ingredients in real time to compound custom target formulas, analyze biochemical synergy, and watch the 3D serum bottle adapt to your recipe.</p>
+                        <a href="#innovation" class="btn-primary">Launch Formulation Simulator</a>
+                    </div>
+                    <div class="sandbox-interactive-preview">
+                        <!-- Small widget preview inside Home Page -->
+                        <div class="lab-widget-card">
+                            <span class="widget-header">Ingredient Formulation Mixer</span>
+                            <div class="ingredient-mixing-sliders">
+                                <div class="slider-control">
+                                    <label>Retinol (Collagen Booster): <span id="val-retinol">0.0%</span></label>
+                                    <input type="range" class="ing-slider" data-ing="retinol" min="0" max="3" step="0.1" value="0">
+                                </div>
+                                <div class="slider-control">
+                                    <label>Hyaluronic Acid (Hydrator): <span id="val-hyaluronic">1.5%</span></label>
+                                    <input type="range" class="ing-slider" data-ing="hyaluronic" min="0" max="5" step="0.2" value="1.5">
+                                </div>
+                                <div class="slider-control">
+                                    <label>24K Gold Particles (Luminosity): <span id="val-gold">0.2%</span></label>
+                                    <input type="range" class="ing-slider" data-ing="gold" min="0" max="1" step="0.05" value="0.2">
+                                </div>
+                            </div>
+                            <div class="synergy-status">
+                                <span>Target Benefit:</span>
+                                <strong id="synergy-benefit-text" class="text-gold">Luminous Deep Hydration</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 8: Why Choose Us -->
+            <div class="why-choose-us section-reveal section-padding">
+                <div class="section-header-centered">
+                    <span class="section-label">EGC DISTINCTIVES</span>
+                    <h2 class="section-title font-playfair">Why Leading Cosmetic Brands Partner with EGC</h2>
+                </div>
+                <div class="grid-3col">
+                    <div class="value-block">
+                        <span class="val-num font-playfair">01 /</span>
+                        <h3>Scientific Purity</h3>
+                        <p>We work exclusively with certified raw material suppliers, incorporating patented green-chemistry actives and sustainable organic carriers.</p>
+                    </div>
+                    <div class="value-block">
+                        <span class="val-num font-playfair">02 /</span>
+                        <h3>Robotic Engineering</h3>
+                        <p>Our plant setups prioritize cleanroom robotic packaging, closed-vacuum homogenizing vessels, and complete batch automation to reduce human error.</p>
+                    </div>
+                    <div class="value-block">
+                        <span class="val-num font-playfair">03 /</span>
+                        <h3>Turnkey Deliverables</h3>
+                        <p>We don't hand over a stack of documents. We stand by you during test-batch validation, equipment trials, and official compliance audits.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 9: Manufacturing & Plant Expertise Blueprint -->
+            <div class="plant-expertise-blueprint section-reveal section-padding theme-dark-cool">
+                <div class="grid-2col align-center">
+                    <div class="blueprint-content">
+                        <span class="section-label text-gold">FACTORY SETUP PLANNING</span>
+                        <h2 class="section-title font-playfair text-white">State-of-the-Art Factory Blueprinting</h2>
+                        <p>Designing a cosmetic manufacturing facility requires critical compliance zoning to pass GMP and ISO certifications. We plan layouts that maximize space efficiency, optimize material flow, and establish pristine cleanroom air handling.</p>
+                        
+                        <div class="interactive-blueprint-selector">
+                            <div class="blueprint-option active" data-capacity="boutique">
+                                <h4>Boutique R&D Plant</h4>
+                                <p>Capacity: 5k - 10k bottles/day. Optimized for small batches.</p>
+                            </div>
+                            <div class="blueprint-option" data-capacity="industrial">
+                                <h4>Global Industrial Plant</h4>
+                                <p>Capacity: 50k - 100k bottles/day. Full robotic automation.</p>
+                            </div>
+                        </div>
+                        <a href="#services" class="btn-secondary">Explore Factory Layout Planning</a>
+                    </div>
+                    <div class="blueprint-visual">
+                        <div class="blueprint-canvas-wrapper">
+                            <span class="blueprint-header-tag">ISO CLASS 7 CLEANROOM BLUEPRINT</span>
+                            <div class="blueprint-schematic-grid" id="blueprint-schematic">
+                                <!-- Dynamically drawing cleanroom schematic panels -->
+                                <div class="blueprint-room zoning-weighing">
+                                    <span>Raw Material Dispensing & Weighing Room</span>
+                                </div>
+                                <div class="blueprint-room zoning-mixing">
+                                    <span>Vacuum Homogenizing & Mixing Bay</span>
+                                </div>
+                                <div class="blueprint-room zoning-filling">
+                                    <span>Automated Glass Filling & Dropper Capping Line</span>
+                                </div>
+                                <div class="blueprint-room zoning-qa">
+                                    <span>QA Chemical & Microbiological Laboratory</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 10: Client Testimonials -->
+            <div class="testimonials section-reveal section-padding">
+                <div class="section-header-centered">
+                    <span class="section-label">PARTNER VOICES</span>
+                    <h2 class="section-title font-playfair">Success Stories in Beauty Science</h2>
+                </div>
+                <div class="testimonial-slider-container">
+                    <div class="testimonial-slide active">
+                        <p class="testimonial-text font-playfair">"EGC revolutionized our product launch timeline. Their formulation chemists solved a stability issue in our SPF moisturizer that three other chemical labs failed to resolve. Absolute professionals."</p>
+                        <div class="testimonial-profile">
+                            <div class="avatar-mock avatar-rose"></div>
+                            <div class="profile-details">
+                                <span class="profile-name">Sophia Sterling</span>
+                                <span class="profile-meta">Founder, Sterling Organics (D2C Skincare)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text font-playfair">"We contracted EGC to design our automated skincare manufacturing plant in Mumbai. They guided us through the equipment procurement, BIS registration, and cleanroom HVAC setup. The plant passed GMP audit on the first try."</p>
+                        <div class="testimonial-profile">
+                            <div class="avatar-mock avatar-charcoal"></div>
+                            <div class="profile-details">
+                                <span class="profile-name">Vikram Malhotra</span>
+                                <span class="profile-meta">Director of Manufacturing, Dermatech India</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-btn prev-slide" aria-label="Previous Slide">&larr;</button>
+                    <button class="slider-btn next-slide" aria-label="Next Slide">&rarr;</button>
+                </div>
+            </div>
+
+            <!-- SECTION 11: Certifications & Credibility Marquee -->
+            <div class="certifications-marquee section-reveal">
+                <div class="cert-marquee-inner">
+                    <span>ISO 22716 GMP Certified</span>
+                    <span class="dot">&bull;</span>
+                    <span>FDA Registered Facility Designs</span>
+                    <span class="dot">&bull;</span>
+                    <span>CDSCO Licensed Plants</span>
+                    <span class="dot">&bull;</span>
+                    <span>Cruelty-Free (PETA) Formulations</span>
+                    <span class="dot">&bull;</span>
+                    <span>BIS Standard Formulations</span>
+                    <span class="dot">&bull;</span>
+                    <span>MoCRA Compliance Ready</span>
+                </div>
+            </div>
+
+            <!-- SECTION 12: Contact Quick CTA -->
+            <div class="contact-quick-cta section-reveal section-padding theme-dark">
+                <div class="grid-2col align-center">
+                    <div class="cta-text">
+                        <h2 class="font-playfair text-white">Begin Your Formulation & Manufacturing Blueprint Today</h2>
+                        <p>Book a strategic session with our chemical engineers and factory planners. We'll map out your project cost estimations, ingredient requirements, and custom launch milestones.</p>
+                    </div>
+                    <div class="cta-actions">
+                        <a href="#contact" class="btn-primary">Schedule Advisory Call</a>
+                        <a href="https://wa.me/mockwhatsapplink" target="_blank" class="btn-whatsapp">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 001.333 4.993L2 22l5.233-1.371a9.946 9.946 0 004.777 1.22c5.508 0 9.99-4.479 9.99-9.986 0-2.67-1.037-5.178-2.924-7.065C17.19 3.037 14.683 2 12.012 2zm5.727 14.047c-.254.717-1.472 1.405-2.022 1.482-.497.07-1.147.126-3.327-.777-2.79-1.157-4.577-3.99-4.716-4.177-.139-.187-1.127-1.497-1.127-2.854 0-1.357.708-2.022.961-2.293.254-.27.553-.339.738-.339.184 0 .368.002.53.01.166.008.388-.063.608.468.225.545.772 1.884.839 2.019.068.136.113.294.022.476-.091.182-.136.294-.272.453-.136.159-.285.355-.407.476-.136.136-.28.286-.12.56.16.273.71 1.171 1.523 1.895.847.754 1.56 1.05 1.785 1.164.225.114.356.096.488-.052.132-.148.56-.653.71-.875.148-.222.298-.187.502-.112.205.074 1.3.613 1.527.726.227.113.378.17.435.267.057.097.057.564-.197 1.28z"/></svg>
+                            <span>WhatsApp Consultation</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 13: Luxury Footer -->
+            <footer class="luxury-footer">
+                <div class="footer-top">
+                    <div class="footer-brand-info">
+                        <img src="assets/logo_white.png" alt="EGC Ekora Global Consulting Logo" class="footer-logo-img">
+                        <p class="footer-desc">Crafting state-of-the-art beauty solutions through biochemical science, robotic operations, and regulatory clarity.</p>
+                        <div class="footer-socials">
+                            <a href="#" aria-label="LinkedIn Profile">LinkedIn</a>
+                            <a href="#" aria-label="Instagram Profile">Instagram</a>
+                            <a href="#" aria-label="YouTube Channel">YouTube</a>
+                        </div>
+                    </div>
+                    <div class="footer-links-grid">
+                        <div class="footer-col">
+                            <h4>Corporate Overview</h4>
+                            <ul>
+                                <li><a href="#about">Company Background</a></li>
+                                <li><a href="#about">Founder's Message</a></li>
+                                <li><a href="#about">Core Corporate Values</a></li>
+                                <li><a href="#careers">Careers & Openings</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Services Portfolio</h4>
+                            <ul>
+                                <li><a href="#services">Formula Development</a></li>
+                                <li><a href="#services">Plant Setup Advisory</a></li>
+                                <li><a href="#services">Regulatory CDSCO Support</a></li>
+                                <li><a href="#services">DPR Cost Estimation</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Product Sectors</h4>
+                            <ul>
+                                <li><a href="#products">Clinical Skincare</a></li>
+                                <li><a href="#products">Hair & Scalp Systems</a></li>
+                                <li><a href="#products">Premium Wellness Beauty</a></li>
+                                <li><a href="#products">Haute Fragrance Lines</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p class="copyright">&copy; 2026 EGC Ekora Global Consulting. All Rights Reserved.</p>
+                    <div class="footer-legal">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms & Conditions</a>
+                        <a href="#">GMP Disclosures</a>
+                    </div>
+                </div>
+            </footer>
+
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW: ABOUT US                             -->
+        <!-- ========================================== -->
+        <section id="view-about" class="page-view">
+            <div class="subpage-header">
+                <span class="subpage-eyebrow">ESTABLISHED 2014</span>
+                <h1 class="subpage-title font-playfair">About EGC</h1>
+            </div>
+            
+            <div class="section-padding">
+                <div class="grid-2col snapshot-section">
+                    <div>
+                        <h3>Company Overview</h3>
+                        <p class="lead-p">EGC was founded to revolutionize cosmetic product launch lifecycles. We combine top-tier pharmaceutical-grade chemical research with automated robotics and industrial cleanroom layout design.</p>
+                        <p>We maintain an advanced laboratory dedicated to ingredient research, green-chemistry surfactant design, and premium anti-aging skincare technologies. Today, EGC serves as the key technical partner for major skincare conglomerates, emerging D2C brands, and dermatological clinical networks across five continents.</p>
+                    </div>
+                    <div class="mission-vision-box">
+                        <div class="box-inner">
+                            <h4>Our Vision</h4>
+                            <p>To lead the global harmonization of cosmetic products, bringing safety, purity, and carbon-neutral green chemistry to modern skincare compounding.</p>
+                            
+                            <h4>Our Mission</h4>
+                            <p>To empower beauty entrepreneurs by providing complete engineering blueprints, scientific compliance clearance, and certified formulation development.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="luxury-divider">
+
+                <div class="founders-message grid-2col align-center">
+                    <div class="founder-img-container">
+                        <div class="founder-img-mock"></div>
+                        <span class="founder-caption">Dr. Elizabeth Vance, Founder & Chief Chemist</span>
+                    </div>
+                    <div class="founder-text">
+                        <span class="section-label">FOUNDER'S MESSAGE</span>
+                        <h2 class="font-playfair">Pioneering Safe & Sustainable Beauty Science</h2>
+                        <p>“When we launched our first laboratory room, the cosmetics industry was heavily reliant on basic petroleum-derived oils and unstable chemical stabilizers. We set out to prove that plant-derived, bio-fermented lipids and clean green emulsifiers could perform equally well, if not better, while preserving our environment.</p>
+                        <p>Today, our engineering team manages complete factory project executions, while our R&D chemists integrate deep AI trend analysis and functional beauty research. We look forward to creating your next groundbreaking beauty line.”</p>
+                    </div>
+                </div>
+
+                <hr class="luxury-divider">
+
+                <div class="core-values">
+                    <h3 class="section-title text-center font-playfair">Our Core Architectural Values</h3>
+                    <div class="grid-4col">
+                        <div class="value-card">
+                            <span class="val-num font-playfair">01</span>
+                            <h4>Purity & Safety</h4>
+                            <p>Every raw ingredient undergoes complete HPLC chemical purity screening and microbiological clearance.</p>
+                        </div>
+                        <div class="value-card">
+                            <span class="val-num font-playfair">02</span>
+                            <h4>Engineering Precision</h4>
+                            <p>We design factories to minimize waste, utilizing predictive automation, and clean solar-thermal power loops.</p>
+                        </div>
+                        <div class="value-card">
+                            <span class="val-num font-playfair">03</span>
+                            <h4>Regulatory Integrity</h4>
+                            <p>We guarantee 100% transparency in safety compliance, export regulatory filings, and labeling disclosures.</p>
+                        </div>
+                        <div class="value-card">
+                            <span class="val-num font-playfair">04</span>
+                            <h4>Bespoke Excellence</h4>
+                            <p>Every brand has its own fingerprint. We design customized product lines reflecting your brand narrative.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW: SERVICES                             -->
+        <!-- ========================================== -->
+        <section id="view-services" class="page-view">
+            <div class="subpage-header">
+                <span class="subpage-eyebrow">OUR END-TO-END CAPABILITIES</span>
+                <h1 class="subpage-title font-playfair srv-title-animated">
+                    <span class="srv-title-left">Consulting</span>
+                    <span class="srv-title-center">&amp;</span>
+                    <span class="srv-title-right">Turnkey Solutions</span>
+                </h1>
+                <div class="srv-title-line"></div>
+            </div>
+
+            <!-- Scroll Track Wrapper -->
+            <div class="srv-scroll-track static-services-track">
+                <!-- Sticky Viewport Container -->
+                <div class="srv-sticky-container section-padding">
+                    
+                    <div class="services-navigation-tabs">
+                        <button class="srv-tab-btn active" data-srv-tab="tab-rd">R&D & Formulation</button>
+                        <button class="srv-tab-btn" data-srv-tab="tab-factory">Plant Setup & Engineering</button>
+                        <button class="srv-tab-btn" data-srv-tab="tab-turnkey">Turnkey Execution</button>
+                        <button class="srv-tab-btn" data-srv-tab="tab-regulatory">Compliance & Business</button>
+                    </div>
+
+                    <!-- SUB-SERVICES DETAIL BLOCKS -->
+                    <div class="srv-tab-content-wrapper srv-slider-viewport">
+                        <div class="srv-slider-track" id="srv-slider-track" style="display: flex; width: 400%; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);">
+                            
+                            <!-- TAB 1: R&D & Formulation -->
+                            <div id="tab-rd" class="srv-tab-pane active" style="width: 25%;">
+                                <div class="grid-2col">
+                                    <div class="pane-details">
+                                        <h3>Cosmetic Research & Product Development</h3>
+                                        <p class="lead-p">Our laboratory represents the gold standard in cosmetic compounding, combining phytomedicinal science and peptide technology.</p>
+                                        
+                                        <ul class="features-checklist">
+                                            <li><strong>Formula Development:</strong> Creating stable, customized formulations for luxury serums, SPF crèmes, and attar-infused body oils.</li>
+                                            <li><strong>Prototype Development:</strong> Shipping actual laboratory benchmark prototype samples for texture, feel, and performance testing.</li>
+                                            <li><strong>Stability Testing:</strong> Comprehensive 3-month accelerated stability testing inside environmental chambers at 40°C & 75% RH.</li>
+                                            <li><strong>Ingredient Research:</strong> Finding bio-actives, botanical extracts, and clean eco-surfactants globally.</li>
+                                            <li><strong>Product Optimization:</strong> Reformulating existing lines to eliminate parabens, silicones, and synthetic colorants.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="pane-visual pane-rd-bg">
+                                        <div class="pane-stat-box">
+                                            <span class="stat-highlight">2,400+</span>
+                                            <span>Stable Formulas Logged</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TAB 2: Plant Setup & Factory Planning -->
+                            <div id="tab-factory" class="srv-tab-pane" style="width: 25%;">
+                                <div class="grid-2col">
+                                    <div class="pane-details">
+                                        <h3>Plant Setup & Factory Layout Planning</h3>
+                                        <p class="lead-p">Building a certified cosmetic factory requires architectural experience. We design compliant industrial structures.</p>
+                                        
+                                        <ul class="features-checklist">
+                                            <li><strong>Factory Layout Design:</strong> Custom CAD floor plans separating material loading, compounding rooms, clean filling zones, and secondary packaging.</li>
+                                            <li><strong>Utility & HVAC Planning:</strong> Specifying clean water loops (RO-Deionized water plants), compressed air lines, and HEPA HVAC air exchanges.</li>
+                                            <li><strong>Equipment Selection:</strong> Assisting in selecting automated vacuum homogenizers, high-speed tube filling machines, and continuous labelers.</li>
+                                            <li><strong>Cleanroom Planning:</strong> Designing Class 100,000 (ISO Class 8) cleanrooms to pass strict microbiological GMP audits.</li>
+                                            <li><strong>Production Line Planning:</strong> Mapping out efficient worker workflows and batch cycle routes.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="pane-visual pane-plant-bg">
+                                        <div class="pane-stat-box">
+                                            <span class="stat-highlight">42</span>
+                                            <span>GMP Cleanrooms Designed</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TAB 3: Turnkey Solutions -->
+                            <div id="tab-turnkey" class="srv-tab-pane" style="width: 25%;">
+                                <div class="grid-2col">
+                                    <div class="pane-details">
+                                        <h3>Turnkey Project Executions</h3>
+                                        <p class="lead-p">For brands seeking hassle-free execution, we serve as the principal contractor for the entire plant setup.</p>
+                                        
+                                        <ul class="features-checklist">
+                                            <li><strong>End-to-End Execution:</strong> Managing construction, cleanroom partitioning, machinery commissioning, and licensing.</li>
+                                            <li><strong>Vendor Coordination:</strong> Procurement of raw equipment from verified European, Indian, and Chinese machinery leaders.</li>
+                                            <li><strong>SOP Formulation Support:</strong> Creating Standard Operating Procedures (SOPs) for warehouse storage, machine cleaning, and batch manufacturing.</li>
+                                            <li><strong>Technical Recruitment Support:</strong> Assisting in hiring chief formulation chemists, packaging technicians, and plant heads.</li>
+                                            <li><strong>Packaging & Supplier Sourcing:</strong> Connecting with premium Italian glass makers and eco-friendly packaging providers.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="pane-visual pane-turnkey-bg">
+                                        <div class="pane-stat-box">
+                                            <span class="stat-highlight">100%</span>
+                                            <span>Audit Clearance Track Record</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TAB 4: Regulatory & Compliance -->
+                            <div id="tab-regulatory" class="srv-tab-pane" style="width: 25%;">
+                                <div class="grid-2col">
+                                    <div class="pane-details">
+                                        <h3>DPR Business Consulting & Regulatory Compliance</h3>
+                                        <p class="lead-p">Establishing a successful cosmetic empire requires precise market intelligence and strict regulatory compliance.</p>
+                                        
+                                        <ul class="features-checklist">
+                                            <li><strong>Detailed Project Reports (DPR):</strong> Comprehensive investment reports covering machinery capital expenditures, utility costs, and operating margins.</li>
+                                            <li><strong>FDA & CDSCO Support:</strong> Handling manufacturing licensing applications, drug dossier filings, and official factory inspections.</li>
+                                            <li><strong>BIS Standards Certification:</strong> Testing and certifying formulations to match strict Bureau of Indian Standards requirements.</li>
+                                            <li><strong>Export Compliance Support:</strong> Creating Certificate of Analysis (COA), Safety Data Sheets (SDS), and International Labeling Compliance.</li>
+                                            <li><strong>Branding & Go-To-Market strategy:</strong> Assisting in product placement, target market profiling, and retail shelf strategies.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="pane-visual pane-compliance-bg">
+                                        <div class="pane-stat-box">
+                                            <span class="stat-highlight">CDSCO / FDA</span>
+                                            <span>Verified Standards Blueprint</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW: PRODUCT EXPERTISE                     -->
+        <!-- ========================================== -->
+        <section id="view-products" class="page-view">
+            <div class="subpage-header">
+                <span class="subpage-eyebrow">FORMULATION CATALOGUE</span>
+                <h1 class="subpage-title font-playfair">Product Capabilities</h1>
+            </div>
+
+            <div class="section-padding">
+                <div class="grid-2col">
+                    <div class="catalog-categories-list">
+                        <div class="catalog-cat-block">
+                            <h3>Skincare & Dermatology</h3>
+                            <p>Clinical acne face washes, multi-weight hyaluronic acid serums, water-gel moisturizers, chemical sunscreens, mud face masks, and balancing toners.</p>
+                        </div>
+                        <div class="catalog-cat-block">
+                            <h3>Hair & Scalp Systems</h3>
+                            <p>Sulfate-free keratin shampoos, nourishing macadamia conditioners, rosemary herbal hair growth oils, frizz-control hair serums, and repair hair masks.</p>
+                        </div>
+                        <div class="catalog-cat-block">
+                            <h3>Premium Body & Lip Care</h3>
+                            <p>Restorative body lotions, whipped shea body butters, hydrating shower gels, exfoliating body scrubs, peptide lip balms, and gold-infused lip oils.</p>
+                        </div>
+                        <div class="catalog-cat-block">
+                            <h3>Grooming & Baby Care</h3>
+                            <p>Beard grooming oils, charcoal men's face washes, organic baby lotions, sulfate-free baby shampoos, and zinc-oxide rash creams.</p>
+                        </div>
+                        <div class="catalog-cat-block">
+                            <h3>Ayurvedic, Herbal & Organic</h3>
+                            <p>GMP-certified Ayurvedic proprietary oils, neem skin clearing range, organic rose waters, and herbal anti-aging elixirs.</p>
+                        </div>
+                        <div class="catalog-cat-block">
+                            <h3>Color Cosmetics & Makeup</h3>
+                            <p>Satin foundations, lightweight compact powders, high-pigment matte lipsticks, lengthening mascaras, and dual-shade liquid eyeliners.</p>
+                        </div>
+                    </div>
+                    <div class="catalog-featured-showcase">
+                        <div class="featured-catalog-card">
+                            <span class="card-eyebrow">FEATURED HIGHLIGHT</span>
+                            <h4>Luxury 24K Gold-Infused Anti-Aging Serum</h4>
+                            <p>A luxury cosmetic masterwork. Combines bio-identical peptides, high-density hyaluronic acid, and actual 24-karat gold leaf flakes suspended in a natural crystalline matrix. Engineered by EGC for the ultimate radiance treatment.</p>
+                            <div class="fluid-properties-indicator">
+                                <span class="prop-tag">Crystalline Viscosity</span>
+                                <span class="prop-tag">Ecocert Surfactants</span>
+                                <span class="prop-tag">Paraben-Free</span>
+                            </div>
+                            <div class="catalog-img-container">
+                                <div class="catalog-img-mock"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW: INDUSTRIES WE SERVE                  -->
+        <!-- ========================================== -->
+        <section id="view-industries" class="page-view">
+            <div class="subpage-header">
+                <span class="subpage-eyebrow">OUR PARTNER SEGMENTS</span>
+                <h1 class="subpage-title font-playfair">Industries We Serve</h1>
+            </div>
+
+            <div class="section-padding">
+                <div class="grid-3col">
+                    <div class="industry-detail-card">
+                        <div class="ind-icon-box">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10m0-20a15.3 15.3 0 00-4 10 15.3 15.3 0 004 10"/>
+                            </svg>
+                        </div>
+                        <h3>D2C & Startup Beauty Brands</h3>
+                        <p>We provide rapid prototyping, flexible small-batch scaling, custom ingredient stories, and packaging coordination to help you launch within months.</p>
+                    </div>
+                    <div class="industry-detail-card">
+                        <div class="ind-icon-box">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4.5 16.5c-1.5 1.25-2.5 3-2.5 5h20c0-2-1-3.75-2.5-5M12 13a5 5 0 100-10 5 5 0 000 10z"/>
+                            </svg>
+                        </div>
+                        <h3>Dermatology Networks</h3>
+                        <p>Clinical-grade, pH-balanced cosmeceuticals with high active concentrations (Niacinamide, Retinol, Salicylic Acid) verified by lab chromatography.</p>
+                    </div>
+                    <div class="industry-detail-card">
+                        <div class="ind-icon-box">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3>Pharmaceutical Companies</h3>
+                        <p>We build production facilities matching Schedule M GMP guidelines, featuring absolute sterile cleanrooms and automatic process data logging.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW: GLOBAL MARKETS                       -->
+        <!-- ========================================== -->
+        <section id="view-global" class="page-view">
+            <div class="subpage-header">
+                <span class="subpage-eyebrow">WORLDWIDE EXPORTS</span>
+                <h1 class="subpage-title font-playfair">Global Markets & Standards</h1>
+            </div>
+
+            <div class="section-padding">
+                <div class="grid-2col">
+                    <div>
+                        <h3>Export Compliance & Advisory</h3>
+                        <p class="lead-p">Exporting cosmetics requires careful planning. We provide regulatory consulting and packaging redesigns to meet various international laws.</p>
+                        <p>Our export consulting services assist in acquiring necessary certificates such as Free Sale Certificates, Certificate of Analysis (COA), Safety Data Sheets (SDS/MSDS), BSE-free declarations, and international labeling clearance.</p>
+                        
+                        <div class="compliance-market-accordion">
+                            <div class="acc-item">
+                                <h4 class="acc-trigger">United States (FDA MoCRA) &rarr;</h4>
+                                <div class="acc-content">
+                                    <p>Comprehensive registration under the FDA Modernization Act, including product listings, raw material safety evaluations, and adverse event reporting systems.</p>
+                                </div>
+                            </div>
+                            <div class="acc-item">
+                                <h4 class="acc-trigger">European Union (CPNP) &rarr;</h4>
+                                <div class="acc-content">
+                                    <p>Compilation of Cosmetic Product Safety Reports (CPSR) by certified toxicologists, CPNP portal notification, and European Responsible Person liaison setup.</p>
+                                </div>
+                            </div>
+                            <div class="acc-item">
+                                <h4 class="acc-trigger">India & SAARC (CDSCO & BIS) &rarr;</h4>
+                                <div class="acc-content">
+                                    <p>Formulation registration, manufacturing licensing, and BIS compliance certificate acquisition for Indian manufacturing and distribution.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="export-calculator-container">
+                        <div class="luxury-card shadow-premium">
+                            <h3>Export Compliance Evaluator</h3>
+                            <p>Select your manufacturing target and destination region to check regulatory requirements instantly.</p>
+                            
+                            <form id="export-eval-form">
+                                <div class="form-group">
+                                    <label for="eval-origin">Manufacturing Origin:</label>
+                                    <select id="eval-origin" class="luxury-input">
+                                        <option value="india">India</option>
+                                        <option value="europe">Europe</option>
+                                        <option value="asia">Southeast Asia</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="eval-destination">Destination Market:</label>
+                                    <select id="eval-destination" class="luxury-input">
+                                        <option value="usa">United States (FDA)</option>
+                                        <option value="eu">European Union (CPNP)</option>
+                                        <option value="me">Middle East (SFDA)</option>
+                                        <option value="in">India (CDSCO/BIS)</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn-primary w-100" id="btn-run-eval">Evaluate Compliance Checklist</button>
+                            </form>
+                            
+                            <div class="eval-results" id="eval-results-box" style="display:none;">
+                                <h4>Requirements Detected:</h4>
+                                <ul id="eval-requirements-list" class="luxury-list">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW: PROJECTS / PORTFOLIO                 -->
+        <!-- ========================================== -->
+        <section id="view-portfolio" class="page-view">
+            <div class="subpage-header">
+                <span class="subpage-eyebrow">CASE STUDY ARCHIVES</span>
+                <h1 class="subpage-title font-playfair">Projects & Turnkey Portfolio</h1>
+            </div>
+
+            <div class="section-padding">
+                <div class="portfolio-filter-bar">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="factory">Factory Builds</button>
+                    <button class="filter-btn" data-filter="formulation">Formulation R&D</button>
+                    <button class="filter-btn" data-filter="brand">Brand Turnkey</button>
+                </div>
+
+                <div class="portfolio-grid-main">
+                    <div class="portfolio-item-card" data-cat="factory">
+                        <div class="port-img-mock img-p1"></div>
+                        <div class="port-info">
+                            <span class="port-cat">FACTORY BUILD / DERMATECH</span>
+                            <h3>DermaTech High-Speed Skincare Plant</h3>
+                            <p>Location: Ahmedabad, India. Custom cleanroom layout, commissioning of high-speed filling lines, and official BIS licensing. Completed in 14 months.</p>
+                            <span class="port-metric">Capacity: 40k bottles/day</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-item-card" data-cat="formulation">
+                        <div class="port-img-mock img-p2"></div>
+                        <div class="port-info">
+                            <span class="port-cat">FORMULATION R&D / STERLING</span>
+                            <h3>Botanical Anti-Aging Skincare Line</h3>
+                            <p>Developed five premium organic formulations incorporating bio-fermented lipids, rose extracts, and multi-weight natural moisture boosters.</p>
+                            <span class="port-metric">Natural Origin Index: 98.4%</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-item-card" data-cat="brand">
+                        <div class="port-img-mock img-p3"></div>
+                        <div class="port-info">
+                            <span class="port-cat">BRAND TURNKEY / ESSENCE</span>
+                            <h3>Essence Organic Haircare Turnkey Launch</h3>
+                            <p>End-to-end execution. Handled supplier sourcing for customized luxury bottles, formulation chemistry, FDA licensing, and final plant setup setup.</p>
+                            <span class="port-metric">Time-to-Market: 8 Months</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW: R&D INNOVATION LAB                  -->
+        <!-- ========================================== -->
+        <section id="view-innovation" class="page-view">
+            <div class="subpage-header">
+                <span class="subpage-eyebrow">BIO-CHEMICAL DESIGN</span>
+                <h1 class="subpage-title font-playfair">R&D Lab & Innovation Hub</h1>
+            </div>
+
+            <div class="section-padding">
+                <div class="grid-2col">
+                    <div class="lab-dashboard-left">
+                        <h3>Interactive Formulation Simulator</h3>
+                        <p class="lead-p">Welcome to our chemical simulation room. Drag the sliders to add biochemically active compounds to your formulation recipe. View active compound interactions, compatibility ratings, and target benefits in real time.</p>
+                        
+                        <div class="simulator-panel shadow-premium">
+                            <div class="compounding-slider-group">
+                                <div class="slider-field">
+                                    <div class="field-label-row">
+                                        <span>Niacinamide (Vitamin B3 - Barrier Repair):</span>
+                                        <strong id="lbl-niacinamide">2.0%</strong>
+                                    </div>
+                                    <input type="range" class="simulator-slider" data-target="niacinamide" min="0" max="10" step="0.5" value="2.0">
+                                </div>
+                                <div class="slider-field">
+                                    <div class="field-label-row">
+                                        <span>Retinol (Vitamin A - Collagen Synthesis):</span>
+                                        <strong id="lbl-retinol-sim">0.0%</strong>
+                                    </div>
+                                    <input type="range" class="simulator-slider" data-target="retinol" min="0" max="2.5" step="0.1" value="0.0">
+                                </div>
+                                <div class="slider-field">
+                                    <div class="field-label-row">
+                                        <span>Vitamin C (Ascorbic Acid - Brightening):</span>
+                                        <strong id="lbl-vitc">0.0%</strong>
+                                    </div>
+                                    <input type="range" class="simulator-slider" data-target="vitc" min="0" max="15" step="0.5" value="0.0">
+                                </div>
+                                <div class="slider-field">
+                                    <div class="field-label-row">
+                                        <span>Hyaluronic Acid (Triple Weight Hydration):</span>
+                                        <strong id="lbl-hyaluronic-sim">1.5%</strong>
+                                    </div>
+                                    <input type="range" class="simulator-slider" data-target="hyaluronic" min="0.5" max="5" step="0.1" value="1.5">
+                                </div>
+                                <div class="slider-field">
+                                    <div class="field-label-row">
+                                        <span>Rose Extract & Herbal Oils (Soothing base):</span>
+                                        <strong id="lbl-herbal">5.0%</strong>
+                                    </div>
+                                    <input type="range" class="simulator-slider" data-target="herbal" min="0" max="10" step="0.5" value="5.0">
+                                </div>
+                            </div>
+                            
+                            <div class="compatibility-meter">
+                                <span>Formula Synergy Rating:</span>
+                                <div class="meter-bar-container">
+                                    <div class="meter-bar-fill" id="synergy-meter-fill" style="width: 95%;"></div>
+                                </div>
+                                <span id="synergy-verdict" class="text-gold">Excellent Compatibility</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lab-dashboard-right">
+                        <div class="chemical-report-card">
+                            <h4>Dynamic Biochemical Report</h4>
+                            <hr class="fine-divider">
+                            <div class="report-metric-row">
+                                <span>Synergy Status:</span>
+                                <strong id="report-synergy">High Bio-Availability</strong>
+                            </div>
+                            <div class="report-metric-row">
+                                <span>Stability Index:</span>
+                                <strong id="report-stability">98.5% (Pre-Validated)</strong>
+                            </div>
+                            <div class="report-metric-row">
+                                <span>Active Viscosity:</span>
+                                <strong id="report-viscosity">450 cPs (Liquid Serum)</strong>
+                            </div>
+                            <div class="report-metric-row">
+                                <span>Target Epidermal Layer:</span>
+                                <strong id="report-layer">Stratum Corneum & Deep Dermis</strong>
+                            </div>
+                            <hr class="fine-divider">
+                            <h5>Formulator Notes:</h5>
+                            <p id="report-notes">This formula is highly stable. The combination of Niacinamide and Hyaluronic Acid creates a powerful barrier repair serum. Safe for all skin types, including sensitive skin. Fully compatible with standard frosted glass bottle droppers.</p>
+                            
+                            <button type="button" class="btn-primary w-100" id="btn-request-prototype">Request Laboratory Batch Sample</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW: CERTIFICATIONS & COMPLIANCE         -->
+        <!-- ========================================== -->
+        <section id="view-certifications" class="page-view">
+            <div class="subpage-header">
+                <span class="subpage-eyebrow">STANDARDS & CERTIFICATES</span>
+                <h1 class="subpage-title font-playfair">Compliance & Quality Control</h1>
+            </div>
+
+            <div class="section-padding">
+                <div class="grid-2col align-center">
+                    <div>
+                        <h3>GMP & Quality Assured Plant Operations</h3>
+                        <p class="lead-p">Quality control is not an afterthought in cosmetic engineering; it is the structural spine. We plan and build facilities to easily clear global regulatory standards.</p>
+                        <p>Our laboratory designs incorporate chemical testing benches, microbiological isolation chambers, and HPLC analysis tools to verify raw material purity before mixing begins.</p>
+                    </div>
+                    <div class="certs-visual-grid">
+                        <div class="cert-card">
+                            <h4>ISO 22716</h4>
+                            <p>Good Manufacturing Practices (GMP) for Cosmetics. Custom floor layouts separating clean zones.</p>
+                        </div>
+                        <div class="cert-card">
+                            <h4>FDA MoCRA</h4>
+                            <p>Complete safety dossiers, product listing registrations, and facility audits ready.</p>
+                        </div>
+                        <div class="cert-card">
+                            <h4>BIS & CDSCO</h4>
+                            <p>Pre-validated testing frameworks matching strict national quality guidelines.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW: INSIGHTS / BLOG                      -->
+        <!-- ========================================== -->
+        <section id="view-blog" class="page-view">
+            <div class="subpage-header">
+                <span class="subpage-eyebrow">EGC JOURNAL</span>
+                <h1 class="subpage-title font-playfair">Insights & Industry Trends</h1>
+            </div>
+
+            <div class="section-padding">
+                <div class="blog-grid-main">
+                    <article class="blog-post-card">
+                        <div class="post-img-mock img-b1"></div>
+                        <div class="post-meta"><span>MAY 20, 2026</span> &bull; <span>INGREDIENT RESEARCH</span></div>
+                        <h3>The Ascent of Bio-Fermented Active Lipids in Skincare</h3>
+                        <p>How sustainable fermentation technologies are replacing heavy synthetic chemical oils, offering deep epidermal absorption and a silky skin feel.</p>
+                        <a href="#blog" class="btn-text-arrow">Read Article &rarr;</a>
+                    </article>
+                    <article class="blog-post-card">
+                        <div class="post-img-mock img-b2"></div>
+                        <div class="post-meta"><span>APRIL 14, 2026</span> &bull; <span>PLANT setup</span></div>
+                        <h3>Designing Cleanrooms to Pass ISO 22716 GMP Audits</h3>
+                        <p>Critical HVAC zoning planning, differential pressure calculations, and anti-static flooring layouts to ensure a flawless first-time audit clearance.</p>
+                        <a href="#blog" class="btn-text-arrow">Read Article &rarr;</a>
+                    </article>
+                    <article class="blog-post-card">
+                        <div class="post-img-mock img-b3"></div>
+                        <div class="post-meta"><span>MARCH 02, 2026</span> &bull; <span>REGULATORY</span></div>
+                        <h3>Unlocking FDA MoCRA: Core Adjustments for Cosmetic Exporters</h3>
+                        <p>An in-depth regulatory guide explaining facility listing requirements, adverse event tracking, and updated ingredient safety clearances.</p>
+                        <a href="#blog" class="btn-text-arrow">Read Article &rarr;</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW: CAREERS                              -->
+        <!-- ========================================== -->
+        <section id="view-careers" class="page-view">
+            <div class="subpage-header">
+                <span class="subpage-eyebrow">JOIN EGC</span>
+                <h1 class="subpage-title font-playfair">Careers in Beauty Science</h1>
+            </div>
+
+            <div class="section-padding">
+                <div class="grid-2col">
+                    <div>
+                        <h3>Work with Global Pioneers</h3>
+                        <p class="lead-p">At EGC, we combine the analytical rigor of pharmaceutical laboratories with the aesthetic craftsmanship of luxury skincare branding. We seek ambitious thinkers, formulation chemists, and mechanical plant planners.</p>
+                        <p>We provide comprehensive research budgets, modern laboratories, and international deployment opportunities for facility commissioning projects.</p>
+                    </div>
+                    <div class="open-positions-list">
+                        <h4>Current Open Positions</h4>
+                        <div class="position-item">
+                            <h5>Lead Formulation Chemist</h5>
+                            <span class="job-meta">R&D Lab, Mumbai &bull; Full-Time</span>
+                            <p>Seeking an experienced chemist to develop premium anti-aging skincare and hair serum formulas. Minimum 5 years of cosmetic lab experience required.</p>
+                            <button type="button" class="btn-secondary btn-apply-job" data-job="chemist">Apply Now</button>
+                        </div>
+                        <div class="position-item">
+                            <h5>Cleanroom HVAC Layout Engineer</h5>
+                            <span class="job-meta">Engineering, Ahmedabad &bull; Full-Time</span>
+                            <p>Designing compliant cleanrooms, differential pressure air systems, and machinery layouts for large-scale cosmetic factories.</p>
+                            <button type="button" class="btn-secondary btn-apply-job" data-job="engineer">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Careers Modal Mock -->
+            <div class="careers-modal" id="job-apply-modal" style="display:none;">
+                <div class="modal-content shadow-premium">
+                    <button class="close-modal-btn" id="btn-close-job-modal">&times;</button>
+                    <h3>Application Form</h3>
+                    <h4 id="apply-job-title" class="text-gold">Lead Formulation Chemist</h4>
+                    <form id="job-form">
+                        <div class="form-group">
+                            <label for="job-name">Full Name:</label>
+                            <input type="text" id="job-name" class="luxury-input" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="job-email">Email Address:</label>
+                            <input type="email" id="job-email" class="luxury-input" placeholder="Your email address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="job-resume">Resume Upload (Mock):</label>
+                            <input type="file" id="job-resume" class="luxury-input">
+                        </div>
+                        <button type="submit" class="btn-primary w-100">Submit Application</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW: FAQ                                  -->
+        <!-- ========================================== -->
+        <section id="view-faq" class="page-view">
+            <div class="subpage-header">
+                <span class="subpage-eyebrow">COMMON QUERIES</span>
+                <h1 class="subpage-title font-playfair">Frequently Asked Questions</h1>
+            </div>
+
+            <div class="section-padding">
+                <div class="faq-container-narrow">
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is the typical timeline for custom cosmetic formula development? <span class="faq-icon">+</span></h3>
+                        <div class="faq-answer">
+                            <p>Typically, laboratory bench prototype development takes 4 to 6 weeks. Following client prototype validation, we initiate standard 3-month accelerated stability testing. In total, complete formulation development takes around 4 months.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Do you assist in packaging sourcing and supplier identification? <span class="faq-icon">+</span></h3>
+                        <div class="faq-answer">
+                            <p>Yes. We have a robust global supplier network for custom luxury glass containers, sustainable wood-derived closures, airless pumps, and cardboard box printers. We manage full packaging coordination, compatibility trials, and leak assessments.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What are the core requirements to set up a licensed cosmetic factory in India? <span class="faq-icon">+</span></h3>
+                        <div class="faq-answer">
+                            <p>To acquire a CDSCO cosmetic manufacturing license, you need a GMP-compliant factory layout, a dedicated raw material weighing room, compounding vessel zone, clean filling and packing room, and a QA laboratory. HVAC air circulation must meet BIS guidelines. EGC handles the entire engineering layout planning and licensing dossiers.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Does EGC assist with third-party contract manufacturing coordination? <span class="faq-icon">+</span></h3>
+                        <div class="faq-answer">
+                            <p>Yes. If you prefer not to build a factory, we can identify and audit third-party contract manufacturers (OEM/ODM/Private Label) that match your batch size, quality requirements, and target cost-per-unit milestones.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW: CONTACT                              -->
+        <!-- ========================================== -->
+        <section id="view-contact" class="page-view">
+            <div class="subpage-header">
+                <span class="subpage-eyebrow">GET IN TOUCH</span>
+                <h1 class="subpage-title font-playfair">Connect with Our Engineers</h1>
+            </div>
+
+            <div class="section-padding">
+                <div class="grid-2col">
+                    <div class="contact-info-panel">
+                        <h3>Schedule an Advisory Consultation</h3>
+                        <p class="lead-p">Whether you are an established brand scaling up or a cosmetic startup beginning your journey, our chemists and plant layouts engineers are ready to assist.</p>
+                        
+                        <div class="contact-methods">
+                            <div class="method-item">
+                                <strong>Office Headquarters:</strong>
+                                <span>EGC Ekora Global Consulting, Level 6, Premium Corporate Center, Bandra Kurla Complex, Mumbai, MH 400051, India.</span>
+                            </div>
+                            <div class="method-item">
+                                <strong>Corporate Communications:</strong>
+                                <span>Email: <a href="mailto:contact@ekoraglobal.com">contact@ekoraglobal.com</a></span>
+                                <span>Phone: +91 22 5557 8890</span>
+                            </div>
+                            <div class="method-item">
+                                <strong>Immediate Support:</strong>
+                                <span>WhatsApp: +91 98200 55555 (Mon - Sat, 9am - 6pm IST)</span>
+                            </div>
+                        </div>
+
+                        <!-- High end vector drawing of office coordinates -->
+                        <div class="map-vector-box">
+                            <span class="map-tag">HEADQUARTERS LOCATION</span>
+                            <div class="interactive-map-mock">
+                                <div class="pulsing-locator"></div>
+                                <span class="loc-text">BKC, Mumbai Office</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form-panel">
+                        <div class="luxury-card shadow-premium">
+                            <h3>Project Brief Consultation</h3>
+                            <p>Fill out the parameters below to connect with the corresponding team leader.</p>
+                            
+                            <form id="contact-main-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="c-name">Full Name *</label>
+                                        <input type="text" id="c-name" class="luxury-input" placeholder="Sophia Sterling" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="c-email">Email Address *</label>
+                                        <input type="email" id="c-email" class="luxury-input" placeholder="sophia@brand.com" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="c-company">Company / Brand Name</label>
+                                        <input type="text" id="c-company" class="luxury-input" placeholder="Sterling Cosmetics">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="c-interest">Area of Interest *</label>
+                                        <select id="c-interest" class="luxury-input" required>
+                                            <option value="formulation">Cosmetic Formulation & R&D</option>
+                                            <option value="factory">Plant Setup & Factory Planning</option>
+                                            <option value="turnkey">Turnkey Project Solution</option>
+                                            <option value="regulatory">Regulatory & Export Support</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="c-message">Brief Project Description *</label>
+                                    <textarea id="c-message" class="luxury-input" rows="4" placeholder="Briefly describe your cosmetic product range, target launch date, and batch size milestones." required></textarea>
+                                </div>
+                                <button type="submit" class="btn-primary w-100">Request Technical Advisory</button>
+                            </form>
+                            <div class="form-success-message" id="form-success" style="display:none;">
+                                <h4>Request Submitted Successfully</h4>
+                                <p>Thank you for connecting with EGC. A technical consulting lead will review your formulation parameters or plant layout parameters and contact you within 24 business hours.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Script references -->
+    <script src="app.js"></script>
+</body>
+</html>
