@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import HorizonXAnimation from './components/HorizonXAnimation';
-import LuxuryTextReveal from './components/LuxuryTextReveal';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -147,7 +146,7 @@ const servicePillars = [
         id: 'pillar-rd',
         title: 'R&D & Formulation Laboratory',
         icon: '🔬',
-        services: ['tab-rd', 'tab-stability', 'tab-ingredient']
+        services: ['tab-rd', 'tab-stability', 'tab-ingredient', 'tab-innovative']
     },
     {
         id: 'pillar-engineering',
@@ -202,7 +201,7 @@ const servicesData = {
     },
     'tab-ingredient': {
         id: 'tab-ingredient',
-        title: 'Ingredient Sourcing Support',
+        title: 'Ingredient Sourcing',
         pillar: 'pillar-rd',
         description: 'Connecting brands with premium, standardized botanical extracts, active peptides, and natural organic raw compounds from certified global supply chains.',
         checklist: [
@@ -214,6 +213,23 @@ const servicesData = {
         metricVal: '99.8%',
         metricLbl: 'Raw Material Purity',
         image: botanicalIngredientsImg
+    },
+    'tab-innovative': {
+        id: 'tab-innovative',
+        title: 'Innovative Productivity Developments',
+        pillar: 'pillar-rd',
+        description: 'Pioneering next-generation productivity frameworks that fuse advanced biotechnology, AI-assisted formulation intelligence, and lean laboratory workflows to accelerate product-to-market timelines and maximize output efficiency across every stage of the R&D lifecycle.',
+        checklist: [
+            'AI-driven formulation screening to predict optimal ingredient synergies 10× faster',
+            'High-throughput automated batch testing systems for rapid prototype iteration',
+            'Lean R&D workflow redesign to eliminate bottlenecks and reduce development cycles',
+            'Digital twin laboratory modelling for virtual stress-testing before physical trials',
+            'Cross-functional innovation sprints bridging formulation science with market demand',
+            'KPI dashboards and real-time R&D analytics for continuous performance benchmarking'
+        ],
+        metricVal: '10×',
+        metricLbl: 'Faster Development Cycles',
+        image: cosmeticRdLabImg
     },
     'tab-factory': {
         id: 'tab-factory',
@@ -415,13 +431,14 @@ export default function App() {
     const srvTabsList = [
         'tab-rd', 'tab-mfg', 'tab-factory', 'tab-turnkey', 'tab-privatelabel',
         'tab-regulatory', 'tab-dpr', 'tab-recruitment', 'tab-packaging',
-        'tab-ingredient', 'tab-gtm', 'tab-scaleup', 'tab-stability', 'tab-export'
+        'tab-ingredient', 'tab-gtm', 'tab-scaleup', 'tab-stability', 'tab-export', 'tab-innovative'
     ];
 
     const serviceToPillarMap = {
         'tab-rd': 'pillar-rd',
         'tab-stability': 'pillar-rd',
         'tab-ingredient': 'pillar-rd',
+        'tab-innovative': 'pillar-rd',
         'tab-factory': 'pillar-engineering',
         'tab-turnkey': 'pillar-engineering',
         'tab-mfg': 'pillar-engineering',
@@ -487,8 +504,6 @@ export default function App() {
     });
 
     // Custom Luxury Cursor position tracker
-    const cursorRef = useRef(null);
-    const followerRef = useRef(null);
     const [cursorHovering, setCursorHovering] = useState(false);
 
     // Global Lenis smooth scroll setup
@@ -532,41 +547,6 @@ export default function App() {
     // 2. LUXURY CURSOR & HEADER ANIMATION HOOKS
     // ---------------------------------------------------------
     useEffect(() => {
-        let mouseX = 0, mouseY = 0;
-        let curX = 0, curY = 0;
-        let folX = 0, folY = 0;
-
-        const onMouseMove = (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        };
-
-        const updateCursorTick = () => {
-            if (cursorRef.current && followerRef.current) {
-                let targetX = mouseX;
-                let targetY = mouseY;
-                
-                if (window.magneticTarget) {
-                    targetX = window.magneticTarget.x;
-                    targetY = window.magneticTarget.y;
-                }
-
-                curX += (mouseX - curX) * 0.22;
-                curY += (mouseY - curY) * 0.22;
-                cursorRef.current.style.left = `${curX}px`;
-                cursorRef.current.style.top = `${curY}px`;
-
-                folX += (targetX - folX) * 0.12;
-                folY += (targetY - folY) * 0.12;
-                followerRef.current.style.left = `${folX}px`;
-                followerRef.current.style.top = `${folY}px`;
-            }
-            requestAnimationFrame(updateCursorTick);
-        };
-
-        window.addEventListener('mousemove', onMouseMove);
-        const animId = requestAnimationFrame(updateCursorTick);
-
         // Header scrolled trigger
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
@@ -580,10 +560,8 @@ export default function App() {
         window.addEventListener('resize', handleResize);
 
         return () => {
-            window.removeEventListener('mousemove', onMouseMove);
             window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('resize', handleResize);
-            cancelAnimationFrame(animId);
         };
     }, []);
 
@@ -602,22 +580,9 @@ export default function App() {
                 x: x * 0.35,
                 y: y * 0.35,
                 duration: 0.3,
+                overwrite: "auto",
                 ease: "power2.out"
             });
-            
-            // Magnetically center the follower
-            if (followerRef.current) {
-                followerRef.current.classList.add('magnetic');
-                if (cursorRef.current) cursorRef.current.classList.add('magnetic');
-                
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-                
-                window.magneticTarget = {
-                    x: centerX + x * 0.15,
-                    y: centerY + y * 0.15
-                };
-            }
         };
         
         const handleMagneticLeave = (e) => {
@@ -627,14 +592,9 @@ export default function App() {
                 x: 0,
                 y: 0,
                 duration: 0.6,
+                overwrite: "auto",
                 ease: "elastic.out(1.1, 0.4)"
             });
-            
-            if (followerRef.current) {
-                followerRef.current.classList.remove('magnetic');
-                if (cursorRef.current) cursorRef.current.classList.remove('magnetic');
-                window.magneticTarget = null;
-            }
         };
 
         const setupMagneticListeners = () => {
@@ -915,9 +875,6 @@ export default function App() {
 
     return (
         <div className={cursorHovering ? 'hovering' : ''}>
-            {/* Custom Luxury Cursor Followers */}
-            <div ref={cursorRef} className="custom-cursor"></div>
-            <div ref={followerRef} className="custom-cursor-follower"></div>
 
             {/* Category 9: Luxury Ambient Mesh Backgrounds & Noise Texture */}
             <div className="luxury-noise-overlay"></div>
@@ -925,11 +882,6 @@ export default function App() {
                 <div className="mesh-gradient-1"></div>
                 <div className="mesh-gradient-2"></div>
                 <div className="mesh-gradient-3"></div>
-            </div>
-
-            {/* Category 6: Scroll Progress Indicator Bar */}
-            <div className="scroll-progress-container">
-                <div className="scroll-progress-line" id="scroll-progress-bar"></div>
             </div>
 
             {/* SPA Curtain Wiping Screen Overlay */}
@@ -1159,6 +1111,14 @@ export default function App() {
                         </div>
                         <div className="industries-marquee-container">
                             <div className="marquee-track">
+                                <div className="marquee-item"><span>D2C Beauty Brands</span></div>
+                                <div className="marquee-item"><span>Dermatology Groups</span></div>
+                                <div className="marquee-item"><span>Wellness & Ayurveda Brands</span></div>
+                                <div className="marquee-item"><span>Spa & Salon Chains</span></div>
+                                <div className="marquee-item"><span>Ecommerce Brands</span></div>
+                                <div className="marquee-item"><span>Pharmaceutical Conglomerates</span></div>
+                                <div className="marquee-item"><span>Luxury Retail Chains</span></div>
+                                {/* Duplicated set for seamless looping */}
                                 <div className="marquee-item"><span>D2C Beauty Brands</span></div>
                                 <div className="marquee-item"><span>Dermatology Groups</span></div>
                                 <div className="marquee-item"><span>Wellness & Ayurveda Brands</span></div>
@@ -1643,10 +1603,10 @@ export default function App() {
                 <section id="view-services" className={`page-view ${activePage === '#services' ? 'active animate-in' : ''}`}>
                     <div className="subpage-header">
                         <span className="subpage-eyebrow">OUR CAPABILITIES</span>
-                        <h1 className="subpage-title font-playfair srv-title-animated" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.15em' }}>
-                            <LuxuryTextReveal text="Consulting" type="char" delay={0.1} className="srv-title-left" />
-                            <LuxuryTextReveal text="&" type="char" delay={0.3} className="srv-title-center text-gold" />
-                            <LuxuryTextReveal text="Turnkey Solutions" type="word" delay={0.2} className="srv-title-right" />
+                        <h1 className="subpage-title font-playfair" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.15em' }}>
+                            <span className="srv-title-left">Consulting</span>
+                            <span className="srv-title-center text-gold">&amp;</span>
+                            <span className="srv-title-right">Turnkey Solutions</span>
                         </h1>
                         <div className="srv-title-line" style={{ transform: 'scaleX(1)', opacity: 1 }}></div>
                     </div>
